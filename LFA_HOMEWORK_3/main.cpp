@@ -7,276 +7,244 @@
 //
 
 #include <iostream>
-#include <cstdlib>
-#include <fstream>
-#include <list>
 #include <vector>
-#include <map>
-#include <sstream>
+#include <fstream>
+#include <cstring>
+#include <stack>
 
 using namespace std;
 
-//////////////////////////////////////////////////////////////////////////
-class PDA
+int viz[101], n;
+ifstream f("date.in");
+
+struct pereche
 {
-    //------------------------------------------------------------------------
-public:
-    PDA(string filename);
-    PDA ();
-    void isAccepted(string str);
-    //------------------------------------------------------------------------
-private:
-    void populateTransitionTable(ifstream *p);
-    void initialOuput(string s);
-    void output(string s, string k, unsigned int i);
-    string showCurrentStack();
-    void notAccepted(string str);
-    int numStates;
-    string endStates;
-    string alphabet;
-    list <string> s;
-    map<string, string> m;
-    map<string, int> moveNum;
-    string currentState;
-    //------------------------------------------------------------------------
+    char x;
+    int nod;
+    string pushList;
+    char popList;
+    pereche *leg;
 };
-//////////////////////////////////////////////////////////////////////////
-int main ()
+
+void stack_show(stack<char> s) {
+    
+    while (!s.empty()) {
+        
+        cout << s.top();
+        s.pop();
+    }
+}
+
+void reinit(int nr_stari)
 {
-    //Read the DPDA input files
-    ifstream inStream;
-    inStream.open("teste.in");
-    
-    int nDPDA;
-    inStream >> nDPDA;
-    list<PDA> generic;
-    
-    for (int i = 0; i < nDPDA; i++)
+    for (int i = 0; i < nr_stari; i++)
+        viz[i] = 0;
+}
+
+void insert_b(pereche *&p, int x, char z, char pop, string push)
+{
+    if (p == NULL)
     {
-        string temp;
-        inStream >> temp;
-        generic.push_back(PDA(temp));
+        p = new pereche;
+        p -> leg = NULL;
+        p -> x = z;
+        p -> nod = x;
+        p -> pushList = push;
+        p -> popList = pop;
+        return;
+    }
+    pereche *q;
+    for (q = p; q -> leg != NULL; q = q -> leg);
+    pereche *t;
+    t = new pereche;
+    t -> leg = NULL;
+    t -> x = z;
+    t -> nod = x;
+    t -> popList = pop;
+    t -> pushList = push;
+    q -> leg = t;
+}
+
+void afis(pereche *p)
+{
+    pereche *q;
+    for (q = p; q != NULL; q = q -> leg)
+        cout << "(" << q -> x << " " << q -> nod << ") ";
+}
+
+pereche *cautare(pereche *p, char a)
+{
+    pereche *q;
+    for (q = p; q != NULL; q = q -> leg)
+        if (q -> x == a) return q;
+    return NULL;
+}
+
+bool search_f(int finish[], int p, int nr)
+{
+    int i;
+    for (i = 0; i < nr; i++)
+        if (p == finish[i]) return 1;
+    return 0;
+}
+
+int parcurgere_afn(int stare, string cuvant, pereche *v[], int finish[], int nr, stack<char> s)
+{
+    
+    if (cuvant.size() == 0)
+    {
+        if (search_f(finish, stare, nr) == 1 && s.empty())
+        {
+            return 1;
+        }
+        
+        pereche *index;
+        for (index = v[stare]; index != NULL; index = index -> leg)
+        {
+            if (index -> x == '*'  && s.top() == index -> popList)
+            {
+                stack<char> temp_stack = s;
+                temp_stack.pop();
+                for (int index2 = index -> pushList.size() - 1; index2 >= 0; index2--) {
+                    
+                    if (index->pushList[index2] != '*')
+                        temp_stack.push(index->pushList[index2]);
+                }
+                int next_stare = index -> nod;
+                int o = 0;
+                o = parcurgere_afn(next_stare, cuvant, v, finish, nr, temp_stack);
+                if (o == 1)
+                    return o;
+            }
+        }
+        
+        return 0;
     }
     
-    inStream.close();
+    pereche *index;
+    for (index = v[stare]; index != NULL; index = index -> leg)
+    {
+        
+        if (index -> x == '*' && s.top() == index -> popList)  ///lamda este codat cu *
+        {
+            
+            stack<char> temp_stack = s;
+            temp_stack.pop();
+            for (int index2 = index -> pushList.size() - 1; index2 >= 0; index2--) {
+                
+                if (index->pushList[index2] != '*')
+                    temp_stack.push(index->pushList[index2]);
+            }
+            int next_stare = index -> nod;
+            int o = 0;
+            o = parcurgere_afn(next_stare, cuvant, v, finish, nr, temp_stack);
+            if (o == 1)
+                return o;
+        }
+        
+        else if (index -> x == cuvant[0] && s.top() == index -> popList)
+        {
+            string b;
+            b = cuvant;
+            b.erase(0, 1);
+            
+            stack <char> temp_stack = s;
+            temp_stack.pop();
+            for (int index2 = index -> pushList.size() - 1; index2 >= 0; index2--) {
+                
+                if (index->pushList[index2] != '*')
+                    temp_stack.push(index->pushList[index2]);
+            }
+            
+            int next_stare = index -> nod;
+            int o = 0;
+            
+            o = parcurgere_afn(next_stare, b, v, finish, nr, temp_stack);
+            
+            if (o == 1)
+                return o;
+        }
+    }
     
     return 0;
 }
-//////////////////////////////////////////////////////////////////////////
-//------------------------------------------------------------------------
-PDA::PDA () {}
-//------------------------------------------------------------------------
-PDA::PDA(string filename)
+
+void AFN (pereche *v[], int finish[], int nr)
 {
-    ifstream file;
-    
-    file.open(filename.c_str());
-    
-    if (file.fail())
-    {
-        cout << "Trouble Opening File\n";
-        exit(1);
-    }
-    
-    //set the number of States
-    file >> numStates;
-    
-    //populate the end States
-    file >> endStates;
-    
-    //populate alphabet
-    file >> alphabet;
-    
-    //create our rules/transition table
-    ifstream *pointer = &file;
-    populateTransitionTable (pointer);
-    
-    currentState = "0";
-    s.push_back("Z0");
-    
-    //Tests Any Included Test Cases in the File
-    //e.g. wont do anything if no test cases
-    
-    char buff[256];
-    file.getline(buff, 256);
-    string temp(buff);
-    
-    while (! file.eof())
-    {
-        isAccepted(temp);
-        file >> temp;
-    }
-    
-    file.close();
-}
-//------------------------------------------------------------------------
-void PDA::populateTransitionTable (ifstream *p)
-{
-    int n;
-    *p >> n;
-    
-    string temp;
-    string key = "";
-    string value = "";
-    
-    for (int k = 0; k < n; k++)
-    {
-        //read
-        for (int i = 0; i < 3; i++)
-        {
-            *p >> temp;
-            key.append (temp);
-        }
-        for (int i = 0; i < 2; i++)
-        {
-            *p >> temp;
-            value.append(temp);
-        }
-        moveNum.insert(pair<string, int>(key, k+1));
-        m.insert(pair<string, string>(key, value));
-        key = "";
-        value = "";
-    }
-}
-//------------------------------------------------------------------------
-void PDA::isAccepted(string str)
-{
-    //# represents Lambda, it's reserved it's unconventional enough
-    //not to obstruct other languages
-    string c = str.substr(0);
-    str.append("#");
-    alphabet.append("#");
-    string tempKey = "";
-    string operation = "";
-    
-    initialOuput(c);
-    for (unsigned int i = 0; i < str.size(); i++)
-    {
-        //check alphabet
-        unsigned int alpha = alphabet.find((str.c_str())[i]);
-        if (alpha == string::npos)
-        {
-            cout<<"(Crash)\n";
-            break;
-        }
-        //Prepare Key
-        tempKey.append("(");
-        tempKey.append(currentState);
-        tempKey += (str.c_str())[i];
-        tempKey.append(s.back());
-        tempKey.append(")");
-        
-        //Get Value
-        
-        map<string, string>::iterator it = m.find(tempKey);
-        
-        if (it != m.end())
-        {
-            stringstream out;
-            out << m.find(tempKey)->second;
-            operation = out.str();
-            out.str("");
-        }
-        else
-        {
-            break;
-        }
-        
-        //Set the new State
-        currentState = operation.c_str()[1];
-        
-        //figure out which action to perform with stack
-        
-        string decision = operation.substr(2);
-        unsigned int found = decision.find("^", 0);
-        if (found != string::npos)
-        {
-            s.pop_back();
-        }
-        else
-        {
-            string nextFind = "";
-            nextFind+=(str.c_str())[i];
-            nextFind+="Z0";
-            found = decision.find(nextFind, 0);
-            
-            if (found != string::npos)
-            {
-                nextFind=str.c_str()[i];
-                s.push_back(nextFind);
-            }
-            else
-            {
-                nextFind="";
-                nextFind+=(str.c_str())[i];
-                found = decision.find(nextFind, 0);
-                if (found != string::npos)
-                {
-                    s.push_back(nextFind);
-                }
-            }
-        }
-        output(c, tempKey, i+1);
-        //clear values
-        tempKey = "";
-        operation = "";
-    }
-    
-    unsigned int isEnd = endStates.find(currentState,0);
-    
-    if (isEnd != string::npos)
-    {
-        cout << "(Accepted)\n\n\n";
-    }
+    string cuvant;
+    cin >> cuvant;
+    int o = 0;
+    stack<char> s;
+    s.push('Z');
+    o = parcurgere_afn(0, cuvant, v, finish, nr, s);
+    if (o == 1)
+        cout << "acceptat\n";
     else
-    {
-        cout << "(Not Accepted)\n\n\n";
-    }
-    
-    //reset
-    currentState = "0";
-    s.clear();
-    s.push_back("Z0");
+        cout << "neacceptat\n";
 }
-//------------------------------------------------------------------------
-void PDA::initialOuput (string c)
+
+void citire(int n, pereche *v[], int &m)
 {
-    cout << "(initially)\t"<<currentState<<"\t\t"<<c;
-    
-    if (c.size() < 8) cout<<"\t\t";
-    else cout<< "\t";
-    
-    cout<<showCurrentStack()<<"\n\n"; 
-}
-//------------------------------------------------------------------------
-void PDA::output (string c, string key,unsigned int iteration)
-{
-    cout<< moveNum.find(key)->second << "\t\t" << currentState 
-			 << "\t\t";
-    
-    if (c.size() > iteration) 
+    int i;
+    f >> m;
+    for (i = 0; i < m; i++)
     {
-        cout << c.substr(iteration);
+        int x, y;
+        char z, pop;
+        string push;
+        f >> x >> y;
+        f >> z;
+        /*
+         char delimiter('/');
+         char delimiter2(',');
+         */
+        f >> pop;
+        f >> pop;
+        char temp;
+        f >> temp;
+        getline(f, push);
         
-        if ((c.substr(iteration)).size() < 8)
-            cout << "\t\t"; 
-        else 
-            cout << "\t";
+        insert_b(v[x], y, z, pop, push);
     }
-    else { cout << "\t\t"; }
-    cout << showCurrentStack() <<"\n";
 }
-//------------------------------------------------------------------------
-string PDA::showCurrentStack ()
+
+void citire_finale(int nr, int finish[])
 {
-    string stackState = "";
-    list<string> temp (s);
-    
-    while (temp.size() > 0)
-    {
-        stackState.append(temp.back());
-        temp.pop_back();
-    }
-    return stackState;
+    int i;
+    for (i = 0; i < nr; i++)
+        f >> finish[i];
 }
-//------------------------------------------------------------------------
+
+
+int main()
+{
+    f >> n;
+    pereche *v[n];
+    int i;
+    int m;
+    for (i = 0; i < n; i++)
+        v[i] = NULL;
+    citire(n, v, m);
+    
+    int nr;
+    f >> nr;
+    int finish[nr];
+    citire_finale(nr, finish);
+    
+    for (int i = 0; i < n; i++) {
+        
+        cout << i << ": ";
+        for (pereche* index = v[i]; index != NULL; index = index->leg) {
+            
+            cout << "(" << index -> nod << " , " << index -> x << " , " << index -> popList << " , " << index -> pushList << "), ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+    
+    reinit(n);
+    AFN(v, finish, nr);
+    
+    return 0;
+}
+

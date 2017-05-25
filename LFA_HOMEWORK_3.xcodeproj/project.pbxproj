@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7A38B8A81ECC443000A81205 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A38B8A71ECC443000A81205 /* main.cpp */; };
-		7A38B8B01ECC447A00A81205 /* PDATransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A38B8AE1ECC447A00A81205 /* PDATransition.cpp */; };
-		7A38B8B41ECC44C800A81205 /* Stack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A38B8B21ECC44C800A81205 /* Stack.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,12 +23,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7A1DD1AC1ED72D450025CFB5 /* teste.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = teste.in; sourceTree = "<group>"; };
 		7A38B8A41ECC443000A81205 /* LFA_HOMEWORK_3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LFA_HOMEWORK_3; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A38B8A71ECC443000A81205 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		7A38B8AE1ECC447A00A81205 /* PDATransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PDATransition.cpp; sourceTree = "<group>"; };
-		7A38B8AF1ECC447A00A81205 /* PDATransition.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PDATransition.hpp; sourceTree = "<group>"; };
-		7A38B8B21ECC44C800A81205 /* Stack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stack.cpp; sourceTree = "<group>"; };
-		7A38B8B31ECC44C800A81205 /* Stack.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Stack.hpp; sourceTree = "<group>"; };
+		7A683B391ED7346500D8B113 /* date.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = date.in; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,20 +60,10 @@
 			isa = PBXGroup;
 			children = (
 				7A38B8A71ECC443000A81205 /* main.cpp */,
-				7A38B8B11ECC44BB00A81205 /* PDATransition */,
+				7A1DD1AC1ED72D450025CFB5 /* teste.in */,
+				7A683B391ED7346500D8B113 /* date.in */,
 			);
 			path = LFA_HOMEWORK_3;
-			sourceTree = "<group>";
-		};
-		7A38B8B11ECC44BB00A81205 /* PDATransition */ = {
-			isa = PBXGroup;
-			children = (
-				7A38B8AE1ECC447A00A81205 /* PDATransition.cpp */,
-				7A38B8AF1ECC447A00A81205 /* PDATransition.hpp */,
-				7A38B8B21ECC44C800A81205 /* Stack.cpp */,
-				7A38B8B31ECC44C800A81205 /* Stack.hpp */,
-			);
-			name = PDATransition;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +124,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A38B8B01ECC447A00A81205 /* PDATransition.cpp in Sources */,
 				7A38B8A81ECC443000A81205 /* main.cpp in Sources */,
-				7A38B8B41ECC44C800A81205 /* Stack.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,16 +221,21 @@
 		7A38B8AC1ECC443000A81205 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				DEVELOPMENT_TEAM = 2S2RSVRNML;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "x86_64 i386";
 			};
 			name = Debug;
 		};
 		7A38B8AD1ECC443000A81205 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				DEVELOPMENT_TEAM = 2S2RSVRNML;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "x86_64 i386";
 			};
 			name = Release;
 		};
@@ -269,6 +258,7 @@
 				7A38B8AD1ECC443000A81205 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
