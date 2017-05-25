@@ -1,0 +1,66 @@
+3
+5
+0 0 a,Z/BBZ
+0 0 a,B/BBB
+0 1 b,B/*
+1 1 b,B/*
+1 2 b,Z/*
+1
+2
+abbb - merge
+aabbbbb - merge
+abb - nu merge
+
+6
+12
+0 1 a,Z/DDDDDZ
+1 1 a,D/DDDD
+1 2 a,D/BD
+2 2 a,B/BB
+2 3 b,B/*
+3 3 b,B/*
+3 4 b,D/CCCD
+4 4 b,C/CCC
+4 5 c,C/*
+5 5 c,C/*
+5 5 d,D/*
+5 6 *,Z/*
+1
+6
+aabbcccddddd - nu merge
+
+4
+9
+0 0 a,Z/BZ
+0 0 a,B/A
+0 0 a,A/BA
+0 1 b,A/CCCA
+1 1 b,C/CCCC
+1 2 c,C/*
+2 2 c,C/*
+2 2 d,A/*
+2 3 *,Z/*
+1
+3
+aaaabbccccccdd - merge
+
+10 15
+0 1 a,A/AA
+0 1 a,Z/AZ
+1 0 a,A/A
+0 2 b,A/A
+2 3 b,A/A
+3 4 b,A/*
+4 2 b,A/A
+4 5 b,Z/Z
+5 6 b,Z/Z
+6 7 b,Z/Z
+7 5 b,Z/Z
+7 8 *,Z/*
+4 9 *,A/*
+9 9 *,A/*
+9 8 *,Z/*
+1
+8
+aabbbbbb - merge
+aaabbbb - nu merge
