@@ -101,7 +101,8 @@ int crossIntoAFN(int state, string word, Pair *v[], int finish[], int nr, stack<
 void AFN(Pair *v[], int finish[], int nr)
 {
     string word;
-    cin >> word;
+    
+    cout << "Test: "; cin >> word;
     
     stack<char> s;
     s.push('Z');
