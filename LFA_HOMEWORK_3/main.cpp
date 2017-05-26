@@ -6,9 +6,8 @@
 //  Copyright © 2017 Marius Ilie. All rights reserved.
 //
 
-#include "Pair.hpp"
-#include "AFN.h"
-#include "Readers.h"
+#include "AFN.cpp"
+#include "Readers.cpp"
 
 int main()
 {

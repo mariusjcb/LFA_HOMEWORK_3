@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7A38B8A81ECC443000A81205 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A38B8A71ECC443000A81205 /* main.cpp */; };
 		7AEAD4D01ED87BA50085BCA1 /* Pair.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AEAD4CE1ED87BA50085BCA1 /* Pair.cpp */; };
+		7AEAD4D51ED8818A0085BCA1 /* AFN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AEAD4D11ED87C2D0085BCA1 /* AFN.cpp */; };
+		7AEAD4D61ED8818D0085BCA1 /* Readers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AEAD4D21ED87C890085BCA1 /* Readers.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,8 +32,8 @@
 		7A683B391ED7346500D8B113 /* date.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = date.in; sourceTree = "<group>"; };
 		7AEAD4CE1ED87BA50085BCA1 /* Pair.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pair.cpp; sourceTree = "<group>"; };
 		7AEAD4CF1ED87BA50085BCA1 /* Pair.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Pair.hpp; sourceTree = "<group>"; };
-		7AEAD4D11ED87C2D0085BCA1 /* AFN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFN.h; sourceTree = "<group>"; };
-		7AEAD4D21ED87C890085BCA1 /* Readers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Readers.h; sourceTree = "<group>"; };
+		7AEAD4D11ED87C2D0085BCA1 /* AFN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AFN.cpp; sourceTree = "<group>"; };
+		7AEAD4D21ED87C890085BCA1 /* Readers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Readers.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,8 +67,8 @@
 			isa = PBXGroup;
 			children = (
 				7A38B8A71ECC443000A81205 /* main.cpp */,
-				7AEAD4D11ED87C2D0085BCA1 /* AFN.h */,
-				7AEAD4D21ED87C890085BCA1 /* Readers.h */,
+				7AEAD4D11ED87C2D0085BCA1 /* AFN.cpp */,
+				7AEAD4D21ED87C890085BCA1 /* Readers.cpp */,
 				7AEAD4D31ED87CA40085BCA1 /* Pair */,
 				7AEAD4D41ED87CB30085BCA1 /* Data Files */,
 			);
@@ -149,6 +151,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AEAD4D61ED8818D0085BCA1 /* Readers.cpp in Sources */,
+				7AEAD4D51ED8818A0085BCA1 /* AFN.cpp in Sources */,
 				7A38B8A81ECC443000A81205 /* main.cpp in Sources */,
 				7AEAD4D01ED87BA50085BCA1 /* Pair.cpp in Sources */,
 			);

@@ -16,7 +16,6 @@
 #include <stack>
 
 using namespace std;
-ifstream f("date.in");
 
 class Pair
 {
@@ -46,6 +45,6 @@ public:
     char getPopList();
 };
 
-void insertPairForValues(Pair *&, int, char, char, string);
+void insertPairForValues(Pair*&, int, char, char, string);
 
 #endif /* Pair_hpp */

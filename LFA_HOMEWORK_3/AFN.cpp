@@ -6,8 +6,7 @@
 //  Copyright © 2017 Marius Ilie. All rights reserved.
 //
 
-#ifndef AFN_h
-#define AFN_h
+#include "Pair.hpp"
 
 //MARK: Check if a state is final
 bool checkFinal(int finish[], int p, int nr)
@@ -57,7 +56,7 @@ int crossIntoAFN(int state, string word, Pair *v[], int finish[], int nr, stack<
     Pair *index;
     for (index = v[state]; index != NULL; index = index->getLeg())
     {
-        
+
         if (index->getX() == '*' && s.top() == index->getPopList())
         {
             
@@ -112,5 +111,3 @@ void AFN(Pair *v[], int finish[], int nr)
     else
         cout << "neacceptat\n";
 }
-
-#endif /* AFN_h */

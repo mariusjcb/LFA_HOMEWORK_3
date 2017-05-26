@@ -6,9 +6,9 @@
 //  Copyright © 2017 Marius Ilie. All rights reserved.
 //
 
-#ifndef Readers_h
-#define Readers_h
+#include "Pair.hpp"
 
+ifstream f("date.in");
 void readPairFromFile(int n, Pair *v[], int &m)
 {
     int i;
@@ -37,5 +37,3 @@ void readFinalsFromFile(int nr, int finish[])
     for (i = 0; i < nr; i++)
         f >> finish[i];
 }
-
-#endif /* Readers_h */
