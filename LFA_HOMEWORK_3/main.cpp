@@ -6,7 +6,6 @@
 //  Copyright © 2017 Marius Ilie. All rights reserved.
 //
 
-#include "AFN.cpp"
 #include "Readers.cpp"
 
 int main()

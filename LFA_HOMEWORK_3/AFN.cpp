@@ -6,7 +6,7 @@
 //  Copyright © 2017 Marius Ilie. All rights reserved.
 //
 
-#include "Pair.hpp"
+#include "Pair.cpp"
 
 //MARK: Check if a state is final
 bool checkFinal(int finish[], int p, int nr)

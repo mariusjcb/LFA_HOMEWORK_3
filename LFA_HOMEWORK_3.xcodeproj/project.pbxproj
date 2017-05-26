@@ -153,8 +153,8 @@
 			files = (
 				7AEAD4D61ED8818D0085BCA1 /* Readers.cpp in Sources */,
 				7AEAD4D51ED8818A0085BCA1 /* AFN.cpp in Sources */,
-				7A38B8A81ECC443000A81205 /* main.cpp in Sources */,
 				7AEAD4D01ED87BA50085BCA1 /* Pair.cpp in Sources */,
+				7A38B8A81ECC443000A81205 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

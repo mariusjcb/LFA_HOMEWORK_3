@@ -6,9 +6,11 @@
 //  Copyright © 2017 Marius Ilie. All rights reserved.
 //
 
-#include "Pair.hpp"
+#include "AFN.cpp"
 
+#include <fstream>
 ifstream f("date.in");
+
 void readPairFromFile(int n, Pair *v[], int &m)
 {
     int i;
