@@ -108,7 +108,7 @@ void AFN(Pair *v[], int finish[], int nr)
     s.push('Z');
     
     if (crossIntoAFN(0, word, v, finish, nr, s))
-        cout << "acceptat\n";
+        cout << "Acceptat\n\n";
     else
-        cout << "neacceptat\n";
+        cout << "Neacceptat\n\n";
 }

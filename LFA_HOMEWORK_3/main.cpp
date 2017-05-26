@@ -24,7 +24,8 @@ int main()
     int finish[nr];
     readFinalsFromFile(nr, finish);
     
-    AFN(v, finish, nr);
+    while(1)
+        AFN(v, finish, nr);
     
     return 0;
 }
