@@ -23,6 +23,7 @@ bool checkFinal(int finish[], int p, int nr)
 //MARK: Parcruge AFN-ul using '*' as Lambda char
 int crossIntoAFN(int state, string word, Pair *v[], int finish[], int nr, stack<char> s)
 {
+    //MARK: NULL Word or Lambda
     if (word.size() == 0)
     {
         if (checkFinal(finish, state, nr) == 1 && s.empty())
@@ -56,7 +57,6 @@ int crossIntoAFN(int state, string word, Pair *v[], int finish[], int nr, stack<
     Pair *index;
     for (index = v[state]; index != NULL; index = index->getLeg())
     {
-
         if (index->getX() == '*' && s.top() == index->getPopList())
         {
             
